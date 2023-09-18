@@ -1,6 +1,4 @@
-import 'dart:convert';
-
-import 'package:dio/dio.dart';
+// ignore_for_file: file_names
 
 import '../Models/getAllProductsModel.dart';
 import '../helper/api.dart';
@@ -18,7 +16,7 @@ class GetAllProductsFromEachCategory {
         products.add(GetAllProductsModel.fromJson(data[i]));
       }
       return products;
-    } on Exception catch (e) {
+    } on Exception {
       return [];
     }
   }

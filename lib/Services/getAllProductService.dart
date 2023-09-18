@@ -1,6 +1,5 @@
-import 'dart:convert';
+// ignore_for_file: file_names
 
-import 'package:dio/dio.dart';
 import 'package:storeapp/Models/getAllProductsModel.dart';
 import 'package:storeapp/helper/api.dart';
 
@@ -14,7 +13,7 @@ class GetAllProductsService {
         products.add(GetAllProductsModel.fromJson(data[i]));
       }
       return products;
-    } on Exception catch (e) {
+    } on Exception {
       return [];
     }
   }

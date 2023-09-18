@@ -1,7 +1,5 @@
-import 'dart:convert';
+// ignore_for_file: file_names
 
-import 'package:dio/dio.dart';
-import 'package:storeapp/Models/getAllProductsModel.dart';
 import 'package:storeapp/helper/api.dart';
 
 class GetAllCategoriesService {
@@ -10,7 +8,7 @@ class GetAllCategoriesService {
       List<dynamic> data =
           await api().get(url: "https://fakestoreapi.com/products/categories");
       return data;
-    } on Exception catch (e) {
+    } on Exception {
       return [];
     }
   }

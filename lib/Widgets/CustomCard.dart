@@ -1,7 +1,9 @@
-import 'package:flutter/cupertino.dart';
+// ignore_for_file: file_names
+
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:storeapp/Models/getAllProductsModel.dart';
+import 'package:storeapp/Pages/Update_Product_Page.dart';
 
 class CustomCard extends StatelessWidget {
   const CustomCard({super.key, required this.productsModel});
@@ -9,7 +11,10 @@ class CustomCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        Navigator.pushNamed(context, UpdateProductPage().id,
+            arguments: productsModel);
+      },
       child: Stack(
         clipBehavior: Clip.none,
         children: [

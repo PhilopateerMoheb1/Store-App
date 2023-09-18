@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'package:storeapp/Models/getAllProductsModel.dart';
 import 'package:storeapp/helper/api.dart';
 

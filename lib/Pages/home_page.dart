@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:storeapp/Models/getAllProductsModel.dart';
-import 'package:storeapp/Services/getAllCategoriesService.dart';
-import 'package:storeapp/Widgets/CustomCard.dart';
+import 'package:storeapp/cubits/getallproducts/get_all_products_cubit.dart';
 
-import '../Services/getAllProductService.dart';
+import '../Widgets/ViewPageAllProductHomePage.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -33,27 +32,21 @@ class HomePage extends StatelessWidget {
       ),
       body: Padding(
         padding: const EdgeInsets.only(left: 16, right: 16, top: 70),
-        child: FutureBuilder(
-            future: GetAllProductsService().getAllProducts(),
-            builder: (context, snapshot) {
-              if (snapshot.hasData) {
-                return GridView.builder(
-                  itemCount: snapshot.data!.length,
-                  clipBehavior: Clip.none,
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    childAspectRatio: 1,
-                    crossAxisSpacing: 10,
-                    mainAxisSpacing: 20,
-                  ),
-                  itemBuilder: (context, index) {
-                    return CustomCard(productsModel: snapshot.data![index]);
-                  },
-                );
-              } else {
-                return const Center(child: CircularProgressIndicator());
-              }
-            }),
+        child: BlocBuilder<GetAllProductsCubit, GetAllProductsState>(
+          builder: (context, state) {
+            if (state is GetAllProductsLoading) {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            } else if (state is GetAllProductsSuccess) {
+              return ViewAllProductsInHomePage(
+                state: state,
+              );
+            } else {
+              return const Text("Failed mother fucker");
+            }
+          },
+        ),
       ),
     );
   }
